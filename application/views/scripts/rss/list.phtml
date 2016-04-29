@@ -20,7 +20,8 @@
 //    //print_r($data); // $data['title'];
 //    echo '<hr>';
 //}
-//?>
+//
+?>
 
 
 <div class="container">
@@ -29,7 +30,7 @@
     </div>
     <div class="row">
 
-        <?php for ($count = 0; $count < count($this->rss); $count++) { ?>
+<?php for ($count = 0; $count < count($this->rss); $count++) { ?>
 
             <div class="panel panel-primary">
                 <div class="panel-leftheading">
@@ -38,15 +39,20 @@
                 <div class="panel-rightbody">
 
                     <?php
-                    $feed = Zend_Feed_Reader::import($this->rss[$count]['link']);
-                    foreach ($feed as $entry) {
-                        $data = array(
-                            'title' => $entry->getTitle(),
-                            'link' => $entry->getLink()
-                        );
-                        //echo $data['link'];
-                        echo '<font color="black"> '.$data['title'].' </font>';
-                        echo '<hr>';
+                    try {
+                        $feed = Zend_Feed_Reader::import($this->rss[$count]['link']);
+
+                        foreach ($feed as $entry) {
+                            $data = array(
+                                'title' => $entry->getTitle(),
+                                'link' => $entry->getLink()
+                            );
+                            //echo $data['link'];
+                            echo '<a href="' . $data['link'] . '" ><font color="black"> ' . $data['title'] . ' </font> </a>';
+                            echo '<hr>';
+                        }
+                    } catch (Exception $e) {
+                        echo '<font color="black">Invalid Url Link</font>';
                     }
                     ?>
                 </div>
@@ -55,7 +61,7 @@
             </div>
 
 
-<?php } ?>
+        <?php } ?>
 
 
     </div>
