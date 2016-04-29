@@ -1,0 +1,62 @@
+
+<?php
+//for ($count = 0; $count < count($this->rss); $count++) {
+//
+//
+//
+//    $feed = Zend_Feed_Reader::import($this->rss[$count]['link']);
+//
+//    foreach ($feed as $entry) {
+//        $data = array(
+//            'title' => $entry->getTitle(),
+//            'link' => $entry->getLink()
+//        );
+//
+//        echo $data['link'];
+//        echo $data['title'];
+//        echo '<br>';
+//    }
+//
+//    //print_r($data); // $data['title'];
+//    echo '<hr>';
+//}
+//?>
+
+
+<div class="container">
+    <div class="page-header">
+        <h1>my News</h1>
+    </div>
+    <div class="row">
+
+        <?php for ($count = 0; $count < count($this->rss); $count++) { ?>
+
+            <div class="panel panel-primary">
+                <div class="panel-leftheading">
+                    <h3 class="panel-lefttitle"><?php echo $this->rss[$count]['title']; ?></h3>
+                </div>
+                <div class="panel-rightbody">
+
+                    <?php
+                    $feed = Zend_Feed_Reader::import($this->rss[$count]['link']);
+                    foreach ($feed as $entry) {
+                        $data = array(
+                            'title' => $entry->getTitle(),
+                            'link' => $entry->getLink()
+                        );
+                        //echo $data['link'];
+                        echo '<font color="black"> '.$data['title'].' </font>';
+                        echo '<hr>';
+                    }
+                    ?>
+                </div>
+                <div class="clearfix">
+                </div>
+            </div>
+
+
+<?php } ?>
+
+
+    </div>
+</div>

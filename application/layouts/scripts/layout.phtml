@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>my News</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="<?php echo $this->baseUrl();?>/css/bootstrap.min.css" type='text/css'>
+  <link rel="stylesheet" href="<?php echo $this->baseUrl();?>/css/bootstrap-theme.min.css" type='text/css'>
+  <link rel="stylesheet" href="<?php echo $this->baseUrl();?>/css/myCss.css" type='text/css'>
+  <script src="<?php echo $this->baseUrl();?>/js/bootstrap.min.js"></script>
+  
+  <style>
+  body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 { 
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+  .bg-2 { 
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+  .bg-3 { 
+      background-color: #ffffff; /* White */
+      color: #555555;
+  }
+  .bg-4 { 
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+        
+        <?php
+           $authorization = Zend_Auth::getInstance();
+           if (!$authorization->hasIdentity()) {
+               
+           }
+           else{
+               $storage = $authorization->getIdentity();
+               $username = $storage->username;
+               //$photo = $storage->read()->user_photo;
+               echo '<a class="navbar-brand">welcome '.$username.' </a>';
+               //echo '<img src="'.$photo.' "> ';
+           }
+        
+        ?>
+      
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+        <?php $authorization = Zend_Auth::getInstance();
+           if (!$authorization->hasIdentity()) {
+               echo '<li><a href="Registration">New User ?</a></li>';
+               echo '<li><a href="login">Login</a></li>';
+           }
+           
+           else {
+               
+               echo '<li><a href="#">Edit Profile</a></li>';
+               echo '<li><a href="'.$this->baseUrl().'/user/logout">Logout</a></li>';
+           }
+        ?>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- Second Container -->
+<div class="container-fluid bg-2 text-center">
+    <?php 
+    $authorization = Zend_Auth::getInstance();
+       if (!$authorization->hasIdentity()) {
+        echo '<h3 class="margin">Who you are ? </h3>';
+       }
+       else {
+           echo '<ul class="nav nav-tabs">
+                <li role="presentation"><a href="'.$this->baseUrl().'/rss">RSS manager</a></li>
+                <li role="presentation"><a href="'.$this->baseUrl().'/rss/list">My news</a></li>
+                </ul>';
+       }
+       ?>
+  
+  <div class="container" >
+      <?php echo $this->layout()->content; ?>  
+  </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>Bootstrap Theme Made By <a href="http://www.w3schools.com">www.w3schools.com</a></p> 
+  <p>Copy rights w kda  Mohamed Ayyad</p>
+</footer>
+
+</body>
+</html>
+
+
+
+

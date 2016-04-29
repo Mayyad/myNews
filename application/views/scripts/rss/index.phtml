@@ -1,0 +1,18 @@
+
+<?php
+
+echo $this->rss;
+
+if ($this->myrss == null) {
+    echo 'you dont have Rss ';
+} else {
+
+    for ($count = 0; $count < count($this->myrss); $count++) {
+
+        print_r($this->myrss[$count]['title']); 
+        echo '                                                          ';
+        echo '<a href="'.$this->baseUrl().'/rss/delete/id/'.$this->myrss[$count]['rss_id'].'" class="btn btn-danger" > Delete</a>';
+        echo '<br>';
+    }
+}
+?>
